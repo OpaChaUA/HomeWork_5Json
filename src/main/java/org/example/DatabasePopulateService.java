@@ -7,19 +7,14 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class DatabaseInitService {
-    public static final String INIT_DB_FILENAME = "sql/init_db.sql";
-
-    public static void main(String[] args) throws SQLException {
+public class DatabasePopulateService {
+    public static final String POPULATE_DB_FILENAME = "sql/populate_db.sql";
+    public static void main(String[] args) {
         Connection connection = Database.getInstance().getConnection();
         try (Statement statement = connection.createStatement()){
-            String sql = String.join(
-                    "\n",
-                    Files.readAllLines(Path.of(INIT_DB_FILENAME))
-            );
+            String sql = Files.readString(Path.of(POPULATE_DB_FILENAME));
         } catch (SQLException | IOException e) {
             e.printStackTrace();
         }
-
     }
 }
