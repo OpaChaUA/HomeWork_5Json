@@ -13,13 +13,12 @@ public class DatabaseInitService {
     public static void main(String[] args) throws SQLException {
         Connection connection = Database.getInstance().getConnection();
         try (Statement statement = connection.createStatement()){
-            String sql = String.join(
-                    "\n",
-                    Files.readAllLines(Path.of(INIT_DB_FILENAME))
-            );
+            String sql = Files.readString(Path.of(INIT_DB_FILENAME));
+            statement.executeUpdate(sql);
         } catch (SQLException | IOException e) {
             e.printStackTrace();
         }
+
 
     }
 }

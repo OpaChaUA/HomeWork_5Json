@@ -13,6 +13,7 @@ public class DatabasePopulateService {
         Connection connection = Database.getInstance().getConnection();
         try (Statement statement = connection.createStatement()){
             String sql = Files.readString(Path.of(POPULATE_DB_FILENAME));
+            statement.executeUpdate(sql);
         } catch (SQLException | IOException e) {
             e.printStackTrace();
         }
