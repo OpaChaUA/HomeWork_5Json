@@ -5,10 +5,7 @@ import org.example.dto.*;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,29 +23,32 @@ public class DatabaseQueryService {
     private static final String COLUMN_BIRTHDAY = "birthday";
     private static final String COLUMN_PRICE = "price";
     private final Connection connection = Database.getInstance().getConnection();
-
-    public List<MaxSalaryDto> findMaxSalaryWorker() {
-        List<MaxSalaryDto> maxSalaryDtoList = new ArrayList<>();
-        try (Statement statement = connection.createStatement()) {
-            String sql = Files.readString(Path.of(FIND_MAX_SALARY_WORKER_FILENAME));
-            ResultSet rs = statement.executeQuery(sql);
-            while (rs.next()) {
-                MaxSalaryDto maxSalaryDto = new MaxSalaryDto();
-                maxSalaryDto.setName(rs.getString(COLUMN_NAME));
-                maxSalaryDto.setSalary(rs.getInt(COLUMN_SALARY));
-                maxSalaryDtoList.add(maxSalaryDto);
-            }
-        } catch (SQLException | IOException e) {
-            e.printStackTrace();
+    private PreparedStatement select;
+public List<MaxSalaryDto> findMaxSalaryWorker()  {
+    List<MaxSalaryDto> maxSalaryDtoList = new ArrayList<>();
+    try {
+        String sql = Files.readString(Path.of(FIND_MAX_SALARY_WORKER_FILENAME));
+        select = connection.prepareStatement(sql);
+        ResultSet rs = select.executeQuery();
+        while (rs.next()) {
+            MaxSalaryDto maxSalaryDto = new MaxSalaryDto();
+            maxSalaryDto.setName(rs.getString(COLUMN_NAME));
+            maxSalaryDto.setSalary(rs.getInt(COLUMN_SALARY));
+            maxSalaryDtoList.add(maxSalaryDto);
         }
-        return maxSalaryDtoList;
+    }catch (SQLException | IOException e){
+        e.printStackTrace();
     }
 
-    public List<MaxProjectClientDto> findMaxProjectClient () {
+    return maxSalaryDtoList;
+}
+
+    public List<MaxProjectClientDto> findMaxProjectClient() {
         List<MaxProjectClientDto> maxProjectClientDtoList = new ArrayList<>();
-        try (Statement statement = connection.createStatement()) {
+        try {
             String sql = Files.readString(Path.of(FIND_MAX_PROJECTS_CLIENT_FILENAME));
-            ResultSet rs = statement.executeQuery(sql);
+            select = connection.prepareStatement(sql);
+            ResultSet rs = select.executeQuery();
             while (rs.next()) {
                 MaxProjectClientDto maxProjectClientDto = new MaxProjectClientDto();
                 maxProjectClientDto.setName(rs.getString(COLUMN_NAME));
@@ -63,9 +63,10 @@ public class DatabaseQueryService {
 
     public List<LongestProjectDto> findLongestProject() {
         List<LongestProjectDto> longestProjectDtoList = new ArrayList<>();
-        try (Statement statement = connection.createStatement()) {
+        try {
             String sql = Files.readString(Path.of(FIND_LONGEST_PROJECT_FILENAME));
-            ResultSet rs = statement.executeQuery(sql);
+            select = connection.prepareStatement(sql);
+            ResultSet rs = select.executeQuery();
             while (rs.next()) {
                 LongestProjectDto longestProjectDto = new LongestProjectDto();
                 longestProjectDto.setName(rs.getString(COLUMN_NAME));
@@ -80,9 +81,10 @@ public class DatabaseQueryService {
 
     public List<YoungestEldestWorkersDto> findYoungestEldestWorkers() {
         List<YoungestEldestWorkersDto> youngestEldestWorkersDtoList = new ArrayList<>();
-        try (Statement statement = connection.createStatement()) {
+        try {
             String sql = Files.readString(Path.of(FIND_YOUNGEST_ELDEST_WORKERS_FILENAME));
-            ResultSet rs = statement.executeQuery(sql);
+            select = connection.prepareStatement(sql);
+            ResultSet rs = select.executeQuery();
             while (rs.next()) {
                 YoungestEldestWorkersDto youngestEldestWorkersDto = new YoungestEldestWorkersDto();
                 youngestEldestWorkersDto.setType(rs.getString(COLUMN_TYPE));
@@ -98,9 +100,10 @@ public class DatabaseQueryService {
 
     public List<PrintProjectPricesDto> printProjectPrices() {
         List<PrintProjectPricesDto> printProjectPricesDtoList = new ArrayList<>();
-        try (Statement statement = connection.createStatement()) {
+        try {
             String sql = Files.readString(Path.of(PRINT_PROJECT_PRICES_FILENAME));
-            ResultSet rs = statement.executeQuery(sql);
+            select = connection.prepareStatement(sql);
+            ResultSet rs = select.executeQuery();
             while (rs.next()) {
                 PrintProjectPricesDto printProjectPricesDto = new PrintProjectPricesDto();
                 printProjectPricesDto.setName(rs.getString(COLUMN_NAME));

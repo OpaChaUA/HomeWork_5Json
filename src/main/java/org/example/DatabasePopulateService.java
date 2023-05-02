@@ -4,16 +4,18 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 public class DatabasePopulateService {
     public static final String POPULATE_DB_FILENAME = "sql/populate_db.sql";
+    private static PreparedStatement populateDb;
     public static void main(String[] args) {
         Connection connection = Database.getInstance().getConnection();
-        try (Statement statement = connection.createStatement()){
+        try {
             String sql = Files.readString(Path.of(POPULATE_DB_FILENAME));
-            statement.executeUpdate(sql);
+            populateDb = connection.prepareStatement(sql);
+            populateDb.executeUpdate();
         } catch (SQLException | IOException e) {
             e.printStackTrace();
         }
