@@ -118,14 +118,14 @@ public class DatabasePopulateService {
             String input = Files.readString(Path.of(PROJECT_WORKER_SQL));
             String[] rows = input.split("\n");
 
-            int[] project_id = new int[rows.length];
-            int[] worker_id = new int[rows.length];
+            long[] project_id = new long[rows.length];
+            long[] worker_id = new long[rows.length];
 
 
             for (int i = 0; i < rows.length; i++) {
                 String[] cols = rows[i].split(",");
-                project_id[i] =Integer.parseInt(cols[0]);
-                worker_id[i] =Integer.parseInt(cols[1]);
+                project_id[i] = Long.parseLong(cols[0]);
+                worker_id[i] =Long.parseLong(cols[1]);
 
             }
             insert = connection.prepareStatement("INSERT INTO project_worker (project_id, worker_id) VALUES (?, ?)");
