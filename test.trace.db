@@ -1,25 +1,409 @@
-2023-04-27 17:10:34 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLNonTransientException: Объект уже закрыт
-The object is already closed [90007-214]
-2023-04-27 17:30:44 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Столбец "data" не найден
-Column "data" not found [42122-214]
-	at org.h2.message.DbException.getJdbcSQLException(DbException.java:502)
+2023-05-02 22:20:21 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: Данный метод не разрешен для PreparedStatement; используйте Statement.
+This method is not allowed for a prepared statement; use a regular statement instead. [90130-214]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:554)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477)
 	at org.h2.message.DbException.get(DbException.java:223)
 	at org.h2.message.DbException.get(DbException.java:199)
-	at org.h2.jdbc.JdbcResultSet.getColumnIndex(JdbcResultSet.java:3518)
-	at org.h2.jdbc.JdbcResultSet.getInt(JdbcResultSet.java:337)
-	at org.example.DatabaseQueryService.findLongestProject(DatabaseQueryService.java:72)
-	at org.example.App.main(App.java:13)
-2023-04-27 17:31:00 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Столбец "data" не найден
-Column "data" not found [42122-214]
-	at org.h2.message.DbException.getJdbcSQLException(DbException.java:502)
+	at org.h2.message.DbException.get(DbException.java:188)
+	at org.h2.jdbc.JdbcStatement.executeUpdateInternal(JdbcStatement.java:181)
+	at org.h2.jdbc.JdbcStatement.executeUpdate(JdbcStatement.java:143)
+	at org.example.DatabasePopulateService.main(DatabasePopulateService.java:18)
+2023-05-02 22:27:03 database: flush
+org.h2.message.DbException: Внутренняя ошибка: "org.h2.mvstore.MVStoreException: The file is locked: /Users/admin/Documents/GoIT/modulDEV/JDBCtest/test.mv.db [2.1.214/7]"
+General error: "org.h2.mvstore.MVStoreException: The file is locked: /Users/admin/Documents/GoIT/modulDEV/JDBCtest/test.mv.db [2.1.214/7]" [50000-214]
+	at org.h2.message.DbException.get(DbException.java:212)
+	at org.h2.message.DbException.convert(DbException.java:395)
+	at org.h2.mvstore.db.Store.lambda$new$0(Store.java:125)
+	at org.h2.mvstore.MVStore.handleException(MVStore.java:3318)
+	at org.h2.mvstore.MVStore.panic(MVStore.java:593)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:469)
+	at org.h2.mvstore.MVStore$Builder.open(MVStore.java:4082)
+	at org.h2.mvstore.db.Store.<init>(Store.java:136)
+	at org.h2.engine.Database.<init>(Database.java:324)
+	at org.h2.engine.Engine.openSession(Engine.java:92)
+	at org.h2.engine.Engine.openSession(Engine.java:222)
+	at org.h2.engine.Engine.createSession(Engine.java:201)
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:338)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:122)
+	at org.h2.Driver.connect(Driver.java:59)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:681)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:252)
+	at org.example.Database.<init>(Database.java:16)
+	at org.example.Database.<clinit>(Database.java:9)
+	at org.example.DatabasePopulateService.main(DatabasePopulateService.java:14)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: Внутренняя ошибка: "org.h2.mvstore.MVStoreException: The file is locked: /Users/admin/Documents/GoIT/modulDEV/JDBCtest/test.mv.db [2.1.214/7]"
+General error: "org.h2.mvstore.MVStoreException: The file is locked: /Users/admin/Documents/GoIT/modulDEV/JDBCtest/test.mv.db [2.1.214/7]" [50000-214]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:554)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477)
+	... 20 more
+Caused by: org.h2.mvstore.MVStoreException: The file is locked: /Users/admin/Documents/GoIT/modulDEV/JDBCtest/test.mv.db [2.1.214/7]
+	at org.h2.mvstore.DataUtils.newMVStoreException(DataUtils.java:1004)
+	at org.h2.mvstore.FileStore.open(FileStore.java:178)
+	at org.h2.mvstore.FileStore.open(FileStore.java:128)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:452)
+	... 14 more
+2023-05-02 22:43:15 database: flush
+org.h2.message.DbException: Внутренняя ошибка: "org.h2.mvstore.MVStoreException: The file is locked: /Users/admin/Documents/GoIT/modulDEV/JDBCtest/test.mv.db [2.1.214/7]"
+General error: "org.h2.mvstore.MVStoreException: The file is locked: /Users/admin/Documents/GoIT/modulDEV/JDBCtest/test.mv.db [2.1.214/7]" [50000-214]
+	at org.h2.message.DbException.get(DbException.java:212)
+	at org.h2.message.DbException.convert(DbException.java:395)
+	at org.h2.mvstore.db.Store.lambda$new$0(Store.java:125)
+	at org.h2.mvstore.MVStore.handleException(MVStore.java:3318)
+	at org.h2.mvstore.MVStore.panic(MVStore.java:593)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:469)
+	at org.h2.mvstore.MVStore$Builder.open(MVStore.java:4082)
+	at org.h2.mvstore.db.Store.<init>(Store.java:136)
+	at org.h2.engine.Database.<init>(Database.java:324)
+	at org.h2.engine.Engine.openSession(Engine.java:92)
+	at org.h2.engine.Engine.openSession(Engine.java:222)
+	at org.h2.engine.Engine.createSession(Engine.java:201)
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:338)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:122)
+	at org.h2.Driver.connect(Driver.java:59)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:681)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:252)
+	at org.example.Database.<init>(Database.java:16)
+	at org.example.Database.<clinit>(Database.java:9)
+	at org.example.DatabasePopulateService.main(DatabasePopulateService.java:14)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: Внутренняя ошибка: "org.h2.mvstore.MVStoreException: The file is locked: /Users/admin/Documents/GoIT/modulDEV/JDBCtest/test.mv.db [2.1.214/7]"
+General error: "org.h2.mvstore.MVStoreException: The file is locked: /Users/admin/Documents/GoIT/modulDEV/JDBCtest/test.mv.db [2.1.214/7]" [50000-214]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:554)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477)
+	... 20 more
+Caused by: org.h2.mvstore.MVStoreException: The file is locked: /Users/admin/Documents/GoIT/modulDEV/JDBCtest/test.mv.db [2.1.214/7]
+	at org.h2.mvstore.DataUtils.newMVStoreException(DataUtils.java:1004)
+	at org.h2.mvstore.FileStore.open(FileStore.java:178)
+	at org.h2.mvstore.FileStore.open(FileStore.java:128)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:452)
+	... 14 more
+2023-05-02 22:52:42 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "SELECT *[*]. FROM worker"
+Syntax error in SQL statement "SELECT *[*]. FROM worker"; SQL statement:
+SELECT *. FROM worker [42000-214]
+2023-05-02 22:54:43 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Невозможно преобразование строки "('John', '1994-01-07', 'Middle', 3500),\000a  ('Max', '1993-07-12', 'Junior', 700),\000a  ('Ivan', '2005-10-10', 'Trainee', 450),\000a  ('Anna', '1990-12-29', 'Middle', 3000),\000a  ('Juli', '1994-12-29', 'Senior', 8500),\000a  ('Sergey', '1970-05-07', 'Senior', 8500),\000a  ('Bobo', '2008-02-15', 'Middle', 1250),\000a  ('Den', '1989-03-08', 'Trainee', 250),\000a  ('Patrik', '1988-07-29', 'Senior', 9000),\000a  ('Kostya', '1994-07-29', 'Junior', 450);" в тип "DATE"
+Cannot parse "DATE" constant "('John', '1994-01-07', 'Middle', 3500),\000a  ('Max', '1993-07-12', 'Junior', 700),\000a  ('Ivan', '2005-10-10', 'Trainee', 450),\000a  ('Anna', '1990-12-29', 'Middle', 3000),\000a  ('Juli', '1994-12-29', 'Senior', 8500),\000a  ('Sergey', '1970-05-07', 'Senior', 8500),\000a  ('Bobo', '2008-02-15', 'Middle', 1250),\000a  ('Den', '1989-03-08', 'Trainee', 250),\000a  ('Patrik', '1988-07-29', 'Senior', 9000),\000a  ('Kostya', '1994-07-29', 'Junior', 450);"; SQL statement:
+INSERT INTO worker (name, birthday, level, salary) VALUES (?, ?, ?, ?) [22007-214]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:506)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477)
+	at org.h2.message.DbException.get(DbException.java:212)
+	at org.h2.value.ValueDate.parse(ValueDate.java:53)
+	at org.h2.value.Value.convertToDate(Value.java:1854)
+	at org.h2.value.Value.convertTo(Value.java:1147)
+	at org.h2.value.Value.convertForAssignTo(Value.java:1092)
+	at org.h2.table.Column.validateConvertUpdateSequence(Column.java:369)
+	at org.h2.table.Table.convertInsertRow(Table.java:926)
+	at org.h2.command.dml.Insert.insertRows(Insert.java:167)
+	at org.h2.command.dml.Insert.update(Insert.java:135)
+	at org.h2.command.dml.DataChangeStatement.update(DataChangeStatement.java:74)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:169)
+	at org.h2.command.Command.executeUpdate(Command.java:252)
+	at org.h2.jdbc.JdbcPreparedStatement.executeUpdateInternal(JdbcPreparedStatement.java:209)
+	at org.h2.jdbc.JdbcPreparedStatement.executeUpdate(JdbcPreparedStatement.java:169)
+	at org.example.DatabasePopulateService.main(DatabasePopulateService.java:24)
+Caused by: java.lang.NumberFormatException: For input string: "('John', '1994"
+	at java.base/java.lang.NumberFormatException.forInputString(NumberFormatException.java:67)
+	at java.base/java.lang.Integer.parseInt(Integer.java:654)
+	at java.base/java.lang.Integer.parseInt(Integer.java:786)
+	at org.h2.util.DateTimeUtils.parseDateValue(DateTimeUtils.java:190)
+	at org.h2.value.ValueDate.parse(ValueDate.java:51)
+	... 13 more
+2023-05-02 22:56:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Недопустимое значение "5" для параметра "parameterIndex"
+Invalid value "5" for parameter "parameterIndex" [90008-214]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:646)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.getInvalidValueException(DbException.java:298)
+	at org.h2.jdbc.JdbcPreparedStatement.setParameter(JdbcPreparedStatement.java:1395)
+	at org.h2.jdbc.JdbcPreparedStatement.setString(JdbcPreparedStatement.java:378)
+	at org.example.DatabasePopulateService.main(DatabasePopulateService.java:23)
+2023-05-02 22:57:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Невозможно преобразование строки "Kostya 1994-07-29 Junior 450" в тип "DATE"
+Cannot parse "DATE" constant "Kostya 1994-07-29 Junior 450"; SQL statement:
+INSERT INTO worker (name, birthday, level, salary) VALUES (?, ?, ?, ?) [22007-214]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:506)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477)
+	at org.h2.message.DbException.get(DbException.java:212)
+	at org.h2.value.ValueDate.parse(ValueDate.java:53)
+	at org.h2.value.Value.convertToDate(Value.java:1854)
+	at org.h2.value.Value.convertTo(Value.java:1147)
+	at org.h2.value.Value.convertForAssignTo(Value.java:1092)
+	at org.h2.table.Column.validateConvertUpdateSequence(Column.java:369)
+	at org.h2.table.Table.convertInsertRow(Table.java:926)
+	at org.h2.command.dml.Insert.insertRows(Insert.java:167)
+	at org.h2.command.dml.Insert.update(Insert.java:135)
+	at org.h2.command.dml.DataChangeStatement.update(DataChangeStatement.java:74)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:169)
+	at org.h2.command.Command.executeUpdate(Command.java:252)
+	at org.h2.jdbc.JdbcPreparedStatement.executeUpdateInternal(JdbcPreparedStatement.java:209)
+	at org.h2.jdbc.JdbcPreparedStatement.executeUpdate(JdbcPreparedStatement.java:169)
+	at org.example.DatabasePopulateService.main(DatabasePopulateService.java:23)
+Caused by: java.lang.NumberFormatException: For input string: "Kostya 1994"
+	at java.base/java.lang.NumberFormatException.forInputString(NumberFormatException.java:67)
+	at java.base/java.lang.Integer.parseInt(Integer.java:668)
+	at java.base/java.lang.Integer.parseInt(Integer.java:786)
+	at org.h2.util.DateTimeUtils.parseDateValue(DateTimeUtils.java:190)
+	at org.h2.value.ValueDate.parse(ValueDate.java:51)
+	... 13 more
+2023-05-02 22:58:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Невозможно преобразование строки "'Kostya'' '1994-07-29' 'Junior'' '450'" в тип "DATE"
+Cannot parse "DATE" constant "'Kostya'' '1994-07-29' 'Junior'' '450'"; SQL statement:
+INSERT INTO worker (name, birthday, level, salary) VALUES (?, ?, ?, ?) [22007-214]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:506)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477)
+	at org.h2.message.DbException.get(DbException.java:212)
+	at org.h2.value.ValueDate.parse(ValueDate.java:53)
+	at org.h2.value.Value.convertToDate(Value.java:1854)
+	at org.h2.value.Value.convertTo(Value.java:1147)
+	at org.h2.value.Value.convertForAssignTo(Value.java:1092)
+	at org.h2.table.Column.validateConvertUpdateSequence(Column.java:369)
+	at org.h2.table.Table.convertInsertRow(Table.java:926)
+	at org.h2.command.dml.Insert.insertRows(Insert.java:167)
+	at org.h2.command.dml.Insert.update(Insert.java:135)
+	at org.h2.command.dml.DataChangeStatement.update(DataChangeStatement.java:74)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:169)
+	at org.h2.command.Command.executeUpdate(Command.java:252)
+	at org.h2.jdbc.JdbcPreparedStatement.executeUpdateInternal(JdbcPreparedStatement.java:209)
+	at org.h2.jdbc.JdbcPreparedStatement.executeUpdate(JdbcPreparedStatement.java:169)
+	at org.example.DatabasePopulateService.main(DatabasePopulateService.java:23)
+Caused by: java.lang.NumberFormatException: For input string: "'Kostya'' '1994"
+	at java.base/java.lang.NumberFormatException.forInputString(NumberFormatException.java:67)
+	at java.base/java.lang.Integer.parseInt(Integer.java:654)
+	at java.base/java.lang.Integer.parseInt(Integer.java:786)
+	at org.h2.util.DateTimeUtils.parseDateValue(DateTimeUtils.java:190)
+	at org.h2.value.ValueDate.parse(ValueDate.java:51)
+	... 13 more
+2023-05-02 22:58:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Невозможно преобразование строки "'Kostya' '1994-07-29' 'Junior'' '450'" в тип "DATE"
+Cannot parse "DATE" constant "'Kostya' '1994-07-29' 'Junior'' '450'"; SQL statement:
+INSERT INTO worker (name, birthday, level, salary) VALUES (?, ?, ?, ?) [22007-214]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:506)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477)
+	at org.h2.message.DbException.get(DbException.java:212)
+	at org.h2.value.ValueDate.parse(ValueDate.java:53)
+	at org.h2.value.Value.convertToDate(Value.java:1854)
+	at org.h2.value.Value.convertTo(Value.java:1147)
+	at org.h2.value.Value.convertForAssignTo(Value.java:1092)
+	at org.h2.table.Column.validateConvertUpdateSequence(Column.java:369)
+	at org.h2.table.Table.convertInsertRow(Table.java:926)
+	at org.h2.command.dml.Insert.insertRows(Insert.java:167)
+	at org.h2.command.dml.Insert.update(Insert.java:135)
+	at org.h2.command.dml.DataChangeStatement.update(DataChangeStatement.java:74)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:169)
+	at org.h2.command.Command.executeUpdate(Command.java:252)
+	at org.h2.jdbc.JdbcPreparedStatement.executeUpdateInternal(JdbcPreparedStatement.java:209)
+	at org.h2.jdbc.JdbcPreparedStatement.executeUpdate(JdbcPreparedStatement.java:169)
+	at org.example.DatabasePopulateService.main(DatabasePopulateService.java:23)
+Caused by: java.lang.NumberFormatException: For input string: "'Kostya' '1994"
+	at java.base/java.lang.NumberFormatException.forInputString(NumberFormatException.java:67)
+	at java.base/java.lang.Integer.parseInt(Integer.java:654)
+	at java.base/java.lang.Integer.parseInt(Integer.java:786)
+	at org.h2.util.DateTimeUtils.parseDateValue(DateTimeUtils.java:190)
+	at org.h2.value.ValueDate.parse(ValueDate.java:51)
+	... 13 more
+2023-05-02 23:08:27 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Невозможно преобразование строки "'Kostya' '1994-07-29' 'Junior'' '450'" в тип "DATE"
+Cannot parse "DATE" constant "'Kostya' '1994-07-29' 'Junior'' '450'"; SQL statement:
+INSERT INTO worker (name, birthday, level, salary) VALUES (?, ?, ?, ?) [22007-214]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:506)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477)
+	at org.h2.message.DbException.get(DbException.java:212)
+	at org.h2.value.ValueDate.parse(ValueDate.java:53)
+	at org.h2.value.Value.convertToDate(Value.java:1854)
+	at org.h2.value.Value.convertTo(Value.java:1147)
+	at org.h2.value.Value.convertForAssignTo(Value.java:1092)
+	at org.h2.table.Column.validateConvertUpdateSequence(Column.java:369)
+	at org.h2.table.Table.convertInsertRow(Table.java:926)
+	at org.h2.command.dml.Insert.insertRows(Insert.java:167)
+	at org.h2.command.dml.Insert.update(Insert.java:135)
+	at org.h2.command.dml.DataChangeStatement.update(DataChangeStatement.java:74)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:169)
+	at org.h2.command.Command.executeUpdate(Command.java:252)
+	at org.h2.jdbc.JdbcPreparedStatement.executeUpdateInternal(JdbcPreparedStatement.java:209)
+	at org.h2.jdbc.JdbcPreparedStatement.executeUpdate(JdbcPreparedStatement.java:169)
+	at org.example.DatabasePopulateService.main(DatabasePopulateService.java:23)
+Caused by: java.lang.NumberFormatException: For input string: "'Kostya' '1994"
+	at java.base/java.lang.NumberFormatException.forInputString(NumberFormatException.java:67)
+	at java.base/java.lang.Integer.parseInt(Integer.java:654)
+	at java.base/java.lang.Integer.parseInt(Integer.java:786)
+	at org.h2.util.DateTimeUtils.parseDateValue(DateTimeUtils.java:190)
+	at org.h2.value.ValueDate.parse(ValueDate.java:51)
+	... 13 more
+2023-05-02 23:08:56 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Невозможно преобразование строки "('Kostya', '1994-07-29', 'Junior', 450);" в тип "DATE"
+Cannot parse "DATE" constant "('Kostya', '1994-07-29', 'Junior', 450);"; SQL statement:
+INSERT INTO worker (name, birthday, level, salary) VALUES (?, ?, ?, ?) [22007-214]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:506)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477)
+	at org.h2.message.DbException.get(DbException.java:212)
+	at org.h2.value.ValueDate.parse(ValueDate.java:53)
+	at org.h2.value.Value.convertToDate(Value.java:1854)
+	at org.h2.value.Value.convertTo(Value.java:1147)
+	at org.h2.value.Value.convertForAssignTo(Value.java:1092)
+	at org.h2.table.Column.validateConvertUpdateSequence(Column.java:369)
+	at org.h2.table.Table.convertInsertRow(Table.java:926)
+	at org.h2.command.dml.Insert.insertRows(Insert.java:167)
+	at org.h2.command.dml.Insert.update(Insert.java:135)
+	at org.h2.command.dml.DataChangeStatement.update(DataChangeStatement.java:74)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:169)
+	at org.h2.command.Command.executeUpdate(Command.java:252)
+	at org.h2.jdbc.JdbcPreparedStatement.executeUpdateInternal(JdbcPreparedStatement.java:209)
+	at org.h2.jdbc.JdbcPreparedStatement.executeUpdate(JdbcPreparedStatement.java:169)
+	at org.example.DatabasePopulateService.main(DatabasePopulateService.java:23)
+Caused by: java.lang.NumberFormatException: For input string: "('Kostya', '1994"
+	at java.base/java.lang.NumberFormatException.forInputString(NumberFormatException.java:67)
+	at java.base/java.lang.Integer.parseInt(Integer.java:654)
+	at java.base/java.lang.Integer.parseInt(Integer.java:786)
+	at org.h2.util.DateTimeUtils.parseDateValue(DateTimeUtils.java:190)
+	at org.h2.value.ValueDate.parse(ValueDate.java:51)
+	... 13 more
+2023-05-02 23:17:17 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Параметр "#2" не установлен
+Parameter "#2" is not set [90012-214]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:646)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477)
 	at org.h2.message.DbException.get(DbException.java:223)
 	at org.h2.message.DbException.get(DbException.java:199)
-	at org.h2.jdbc.JdbcResultSet.getColumnIndex(JdbcResultSet.java:3518)
-	at org.h2.jdbc.JdbcResultSet.getInt(JdbcResultSet.java:337)
-	at org.example.DatabaseQueryService.findLongestProject(DatabaseQueryService.java:72)
-	at org.example.App.main(App.java:13)
+	at org.h2.expression.Parameter.checkSet(Parameter.java:75)
+	at org.h2.jdbc.JdbcPreparedStatement.addBatch(JdbcPreparedStatement.java:1358)
+	at org.example.DatabasePopulateService.main(DatabasePopulateService.java:19)
+2023-05-02 23:18:03 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Параметр "#2" не установлен
+Parameter "#2" is not set [90012-214]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:646)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.expression.Parameter.checkSet(Parameter.java:75)
+	at org.h2.jdbc.JdbcPreparedStatement.addBatch(JdbcPreparedStatement.java:1358)
+	at org.example.DatabasePopulateService.main(DatabasePopulateService.java:19)
+2023-05-02 23:18:22 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Параметр "#2" не установлен
+Parameter "#2" is not set [90012-214]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:646)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.expression.Parameter.checkSet(Parameter.java:75)
+	at org.h2.jdbc.JdbcPreparedStatement.addBatch(JdbcPreparedStatement.java:1358)
+	at org.example.DatabasePopulateService.main(DatabasePopulateService.java:19)
+2023-05-02 23:18:59 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Параметр "#2" не установлен
+Parameter "#2" is not set [90012-214]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:646)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.expression.Parameter.checkSet(Parameter.java:75)
+	at org.h2.jdbc.JdbcPreparedStatement.addBatch(JdbcPreparedStatement.java:1358)
+	at org.example.DatabasePopulateService.main(DatabasePopulateService.java:19)
+2023-05-02 23:19:51 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Параметр "#2" не установлен
+Parameter "#2" is not set [90012-214]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:646)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.expression.Parameter.checkSet(Parameter.java:75)
+	at org.h2.jdbc.JdbcPreparedStatement.addBatch(JdbcPreparedStatement.java:1358)
+	at org.example.DatabasePopulateService.main(DatabasePopulateService.java:19)
+2023-05-02 23:50:47 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Параметр "#2" не установлен
+Parameter "#2" is not set; SQL statement:
+INSERT INTO worker (name, birthday, level, salary) VALUES (?, ?, ?, ?) [90012-214]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:646)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.expression.Parameter.checkSet(Parameter.java:75)
+	at org.h2.command.Prepared.checkParameters(Prepared.java:207)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:159)
+	at org.h2.command.Command.executeUpdate(Command.java:252)
+	at org.h2.jdbc.JdbcPreparedStatement.executeUpdateInternal(JdbcPreparedStatement.java:209)
+	at org.h2.jdbc.JdbcPreparedStatement.executeUpdate(JdbcPreparedStatement.java:169)
+	at org.example.DatabasePopulateService.main(DatabasePopulateService.java:32)
+2023-05-02 23:51:50 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Невозможно преобразование строки "'1994-01-07'" в тип "DATE"
+Cannot parse "DATE" constant "'1994-01-07'"; SQL statement:
+INSERT INTO worker (name, birthday, level, salary) VALUES (?, ?, ?, ?) [22007-214]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:506)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477)
+	at org.h2.message.DbException.get(DbException.java:212)
+	at org.h2.value.ValueDate.parse(ValueDate.java:53)
+	at org.h2.value.Value.convertToDate(Value.java:1854)
+	at org.h2.value.Value.convertTo(Value.java:1147)
+	at org.h2.value.Value.convertForAssignTo(Value.java:1092)
+	at org.h2.table.Column.validateConvertUpdateSequence(Column.java:369)
+	at org.h2.table.Table.convertInsertRow(Table.java:926)
+	at org.h2.command.dml.Insert.insertRows(Insert.java:167)
+	at org.h2.command.dml.Insert.update(Insert.java:135)
+	at org.h2.command.dml.DataChangeStatement.update(DataChangeStatement.java:74)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:169)
+	at org.h2.command.Command.executeUpdate(Command.java:252)
+	at org.h2.jdbc.JdbcPreparedStatement.executeUpdateInternal(JdbcPreparedStatement.java:209)
+	at org.h2.jdbc.JdbcPreparedStatement.executeUpdate(JdbcPreparedStatement.java:169)
+	at org.example.DatabasePopulateService.main(DatabasePopulateService.java:32)
+Caused by: java.lang.NumberFormatException: For input string: "'1994"
+	at java.base/java.lang.NumberFormatException.forInputString(NumberFormatException.java:67)
+	at java.base/java.lang.Integer.parseInt(Integer.java:654)
+	at java.base/java.lang.Integer.parseInt(Integer.java:786)
+	at org.h2.util.DateTimeUtils.parseDateValue(DateTimeUtils.java:190)
+	at org.h2.value.ValueDate.parse(ValueDate.java:51)
+	... 13 more
+2023-05-03 00:03:25 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Параметр "#2" не установлен
+Parameter "#2" is not set [90012-214]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:646)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.expression.Parameter.checkSet(Parameter.java:75)
+	at org.h2.jdbc.JdbcPreparedStatement.addBatch(JdbcPreparedStatement.java:1358)
+	at org.example.DatabasePopulateService.main(DatabasePopulateService.java:30)
+2023-05-03 19:21:57 database: flush
+org.h2.message.DbException: Внутренняя ошибка: "org.h2.mvstore.MVStoreException: The file is locked: /Users/admin/Documents/GoIT/modulDEV/JDBCtest/test.mv.db [2.1.214/7]"
+General error: "org.h2.mvstore.MVStoreException: The file is locked: /Users/admin/Documents/GoIT/modulDEV/JDBCtest/test.mv.db [2.1.214/7]" [50000-214]
+	at org.h2.message.DbException.get(DbException.java:212)
+	at org.h2.message.DbException.convert(DbException.java:395)
+	at org.h2.mvstore.db.Store.lambda$new$0(Store.java:125)
+	at org.h2.mvstore.MVStore.handleException(MVStore.java:3318)
+	at org.h2.mvstore.MVStore.panic(MVStore.java:593)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:469)
+	at org.h2.mvstore.MVStore$Builder.open(MVStore.java:4082)
+	at org.h2.mvstore.db.Store.<init>(Store.java:136)
+	at org.h2.engine.Database.<init>(Database.java:324)
+	at org.h2.engine.Engine.openSession(Engine.java:92)
+	at org.h2.engine.Engine.openSession(Engine.java:222)
+	at org.h2.engine.Engine.createSession(Engine.java:201)
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:338)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:122)
+	at org.h2.Driver.connect(Driver.java:59)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:681)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:252)
+	at org.example.Database.<init>(Database.java:16)
+	at org.example.Database.<clinit>(Database.java:9)
+	at org.example.App.main(App.java:9)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: Внутренняя ошибка: "org.h2.mvstore.MVStoreException: The file is locked: /Users/admin/Documents/GoIT/modulDEV/JDBCtest/test.mv.db [2.1.214/7]"
+General error: "org.h2.mvstore.MVStoreException: The file is locked: /Users/admin/Documents/GoIT/modulDEV/JDBCtest/test.mv.db [2.1.214/7]" [50000-214]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:554)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477)
+	... 20 more
+Caused by: org.h2.mvstore.MVStoreException: The file is locked: /Users/admin/Documents/GoIT/modulDEV/JDBCtest/test.mv.db [2.1.214/7]
+	at org.h2.mvstore.DataUtils.newMVStoreException(DataUtils.java:1004)
+	at org.h2.mvstore.FileStore.open(FileStore.java:178)
+	at org.h2.mvstore.FileStore.open(FileStore.java:128)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:452)
+	... 14 more
+2023-05-03 19:32:04 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Недопустимое значение "0" для параметра "parameterIndex"
+Invalid value "0" for parameter "parameterIndex" [90008-214]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:646)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.getInvalidValueException(DbException.java:298)
+	at org.h2.jdbc.JdbcPreparedStatement.setParameter(JdbcPreparedStatement.java:1395)
+	at org.h2.jdbc.JdbcPreparedStatement.setInt(JdbcPreparedStatement.java:359)
+	at org.example.DatabasePopulateService.insertProjectWorkers(DatabasePopulateService.java:135)
+	at org.example.App.main(App.java:15)
