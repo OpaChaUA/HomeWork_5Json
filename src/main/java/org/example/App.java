@@ -9,18 +9,18 @@ public class App {
         Connection connection = Database.getInstance().getConnection();
 
         DatabasePopulateService databasePopulateService = new DatabasePopulateService();
-       // databasePopulateService.insertWorkers();
-      //  databasePopulateService.insertClients();
-      //  databasePopulateService.insertProjects();
+        databasePopulateService.insertWorkers();
+        databasePopulateService.insertClients();
+        databasePopulateService.insertProjects();
         databasePopulateService.insertProjectWorkers();
 
-//
-//       DatabaseQueryService databaseQueryService = new DatabaseQueryService();
-//        System.out.println(databaseQueryService.findMaxSalaryWorker());
-//       System.out.println(databaseQueryService.findMaxProjectClient());
-//        System.out.println(databaseQueryService.findLongestProject());
-//        System.out.println(databaseQueryService.findYoungestEldestWorkers());
-//        System.out.println(databaseQueryService.printProjectPrices());
+
+       DatabaseQueryService databaseQueryService = new DatabaseQueryService();
+        System.out.println(databaseQueryService.findMaxSalaryWorker());
+       System.out.println(databaseQueryService.findMaxProjectClient());
+        System.out.println(databaseQueryService.findLongestProject());
+        System.out.println(databaseQueryService.findYoungestEldestWorkers());
+        System.out.println(databaseQueryService.printProjectPrices());
 
     }
 }

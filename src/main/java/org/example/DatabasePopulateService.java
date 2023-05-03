@@ -8,17 +8,17 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class DatabasePopulateService {
-    private static final String WORKER_SQL = "sql2/workers.txt";
-    private static final String CLIENT_SQL = "sql2/client.txt";
-    private static final String PROJECT_SQL ="sql2/projects.txt";
-    private static final String PROJECT_WORKER_SQL= "sql2/project_worker.txt";
+    private static final String WORKERS_TXT = "sql2/workers.txt";
+    private static final String CLIENT_TXT = "sql2/client.txt";
+    private static final String PROJECTS_TXT ="sql2/projects.txt";
+    private static final String PROJECT_WORKER_TXT = "sql2/project_worker.txt";
     private static PreparedStatement insert;
 
     public void insertWorkers() {
 
         Connection connection = Database.getInstance().getConnection();
         try {
-            String input = Files.readString(Path.of(WORKER_SQL));
+            String input = Files.readString(Path.of(WORKERS_TXT));
             String[] rows = input.split("\n");
 
             String[] name = new String[rows.length];
@@ -55,7 +55,7 @@ public class DatabasePopulateService {
     public void insertClients() {
         Connection connection = Database.getInstance().getConnection();
         try {
-            String input = Files.readString(Path.of(CLIENT_SQL));
+            String input = Files.readString(Path.of(CLIENT_TXT));
             String[] rows = input.split("\n");
 
             String[] name = new String[rows.length];
@@ -79,7 +79,7 @@ public class DatabasePopulateService {
     public void insertProjects(){
         Connection connection = Database.getInstance().getConnection();
         try {
-            String input = Files.readString(Path.of(PROJECT_SQL));
+            String input = Files.readString(Path.of(PROJECTS_TXT));
             String[] rows = input.split("\n");
 
             int[] client_id = new int[rows.length];
@@ -115,7 +115,7 @@ public class DatabasePopulateService {
     public void insertProjectWorkers(){
         Connection connection = Database.getInstance().getConnection();
         try {
-            String input = Files.readString(Path.of(PROJECT_WORKER_SQL));
+            String input = Files.readString(Path.of(PROJECT_WORKER_TXT));
             String[] rows = input.split("\n");
 
             long[] project_id = new long[rows.length];
@@ -128,7 +128,7 @@ public class DatabasePopulateService {
                 worker_id[i] =Long.parseLong(cols[1]);
 
             }
-            insert = connection.prepareStatement("INSERT INTO project_worker (project_id, worker_id) VALUES (?, ?)");
+            insert = connection.prepareStatement("INSERT INTO project_worker (project_id, worker_id) VALUES (?,?)");
             for (int i = 0; i < rows.length; i++) {
                 long pID = (project_id[i]);
                 long wID = (worker_id[i]);
