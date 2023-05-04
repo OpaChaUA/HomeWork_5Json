@@ -9,10 +9,12 @@ public class App {
         Connection connection = Database.getInstance().getConnection();
 
         DatabasePopulateService databasePopulateService = new DatabasePopulateService();
-        databasePopulateService.insertWorkers();
-        databasePopulateService.insertClients();
-        databasePopulateService.insertProjects();
-        databasePopulateService.insertProjectWorkers();
+        databasePopulateService.workerInsert();
+        databasePopulateService.clientInsert();
+        databasePopulateService.projectInsert();
+        databasePopulateService.projectIdWorkerIdInsert();
+
+
 
 
        DatabaseQueryService databaseQueryService = new DatabaseQueryService();
