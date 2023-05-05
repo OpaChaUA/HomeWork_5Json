@@ -1,8 +1,10 @@
 package org.example;
+
 import org.example.insertDto.Client;
 import org.example.insertDto.Project;
 import org.example.insertDto.ProjectIdWorkerId;
 import org.example.insertDto.Worker;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -32,7 +34,7 @@ public class DatabasePopulateService {
         return line;
     }
 
-    public List<Worker> AddWorkerInfo() {
+    public List<Worker> addWorkerInfo() {
         List<Worker> workerList = new ArrayList<>();
         String line = readFiles(WORKERS_TXT);
         Scanner sc = new Scanner(line);
@@ -50,15 +52,10 @@ public class DatabasePopulateService {
     }
 
     public void workerInsert() {
-        List<Worker> workerList = AddWorkerInfo();
+        List<Worker> workerList = addWorkerInfo();
         try {
-            insert = connection.prepareStatement(
-                    "INSERT INTO worker (name, birthday, level, salary) VALUES (?, ?, ?, ?)");
+            insert = connection.prepareStatement("INSERT INTO worker (name, birthday, level, salary) VALUES (?, ?, ?, ?)");
             for (Worker worker : workerList) {
-                worker.getName();
-                worker.getBirthday();
-                worker.getLevel();
-                worker.getSalary();
                 insert.setString(1, worker.getName());
                 insert.setString(2, worker.getBirthday());
                 insert.setString(3, worker.getLevel());
@@ -73,7 +70,7 @@ public class DatabasePopulateService {
 
     }
 
-    public List<Client> AddClientInfo() {
+    public List<Client> addClientInfo() {
         List<Client> clientList = new ArrayList<>();
         String line = readFiles(CLIENT_TXT);
         Scanner sc = new Scanner(line);
@@ -88,12 +85,10 @@ public class DatabasePopulateService {
     }
 
     public void clientInsert() {
-        List<Client> clientList = AddClientInfo();
+        List<Client> clientList = addClientInfo();
         try {
-            insert = connection.prepareStatement(
-                    "INSERT INTO client (name) VALUES (?)");
+            insert = connection.prepareStatement("INSERT INTO client (name) VALUES (?)");
             for (Client client : clientList) {
-                client.getName();
                 insert.setString(1, client.getName());
                 insert.executeUpdate();
             }
@@ -103,7 +98,8 @@ public class DatabasePopulateService {
         }
 
     }
-    public List<Project> AddProjectInfo() {
+
+    public List<Project> addProjectInfo() {
         List<Project> projectList = new ArrayList<>();
         String line = readFiles(PROJECTS_TXT);
         Scanner sc = new Scanner(line);
@@ -121,17 +117,12 @@ public class DatabasePopulateService {
     }
 
     public void projectInsert() {
-        List<Project> projectList = AddProjectInfo();
+        List<Project> projectList = addProjectInfo();
         try {
-            insert = connection.prepareStatement(
-                    "INSERT INTO project (client_id, name, start_date, finish_date) VALUES (?, ?, ?, ?)");
-            for (Project project:projectList) {
-                project.getClient_id();
-                project.getName();
-                project.getStart_date();
-                project.getFinish_date();
+            insert = connection.prepareStatement("INSERT INTO project (client_id, name, start_date, finish_date) VALUES (?, ?, ?, ?)");
+            for (Project project : projectList) {
                 insert.setInt(1, project.getClient_id());
-                insert.setString(2, project.getName() );
+                insert.setString(2, project.getName());
                 insert.setString(3, project.getStart_date());
                 insert.setString(4, project.getFinish_date());
                 insert.executeUpdate();
@@ -142,8 +133,9 @@ public class DatabasePopulateService {
         }
 
     }
-    public List<ProjectIdWorkerId> AddProjectIdWorkerIdInfo() {
-        List<ProjectIdWorkerId> projectIdWorkerIdList= new ArrayList<>();
+
+    public List<ProjectIdWorkerId> addProjectIdWorkerIdInfo() {
+        List<ProjectIdWorkerId> projectIdWorkerIdList = new ArrayList<>();
         String line = readFiles(PROJECT_WORKER_TXT);
         Scanner sc = new Scanner(line);
         while (sc.hasNextLine()) {
@@ -158,18 +150,12 @@ public class DatabasePopulateService {
     }
 
     public void projectIdWorkerIdInsert() {
-        List<ProjectIdWorkerId> projectIdWorkerIdList = AddProjectIdWorkerIdInfo();
+        List<ProjectIdWorkerId> projectIdWorkerIdList = addProjectIdWorkerIdInfo();
         try {
-            insert = connection.prepareStatement(
-                    "INSERT INTO project_worker (project_id, worker_id) VALUES (?,?)");
-            for (ProjectIdWorkerId projectIdWorkerId: projectIdWorkerIdList) {
-               projectIdWorkerId.getProject_id();
-                 projectIdWorkerId.getWorker_id();
-
-                insert.setLong(1,projectIdWorkerId.getProject_id());
-                insert.setLong(2,projectIdWorkerId.getWorker_id());
-
-
+            insert = connection.prepareStatement("INSERT INTO project_worker (project_id, worker_id) VALUES (?,?)");
+            for (ProjectIdWorkerId projectIdWorkerId : projectIdWorkerIdList) {
+                insert.setLong(1, projectIdWorkerId.getProject_id());
+                insert.setLong(2, projectIdWorkerId.getWorker_id());
                 insert.executeUpdate();
             }
 
