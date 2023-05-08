@@ -1,11 +1,16 @@
 package org.example;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import org.example.insertDto.Client;
 import org.example.insertDto.Project;
 import org.example.insertDto.ProjectIdWorkerId;
 import org.example.insertDto.Worker;
 
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.Reader;
+import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.sql.Connection;
@@ -17,153 +22,95 @@ import java.util.Scanner;
 
 
 public class DatabasePopulateService {
-    private static final String WORKERS_TXT = "sql2/workers.txt";
-    private static final String CLIENT_TXT = "sql2/client.txt";
-    private static final String PROJECTS_TXT = "sql2/projects.txt";
-    private static final String PROJECT_WORKER_TXT = "sql2/project_worker.txt";
+    private static final String WORKERS_JSON = "sql2/worker.json";
+    private static final String CLIENT_JSON = "sql2/client.json";
+    private static final String PROJECTS_JSON = "sql2/project.json";
+    private static final String PROJECT_WORKER_JSON = "sql2/projectWorker.json";
     private static PreparedStatement insert;
     Connection connection = Database.getInstance().getConnection();
 
-    public String readFiles(String file) {
-        String line = null;
-        try {
-            line = Files.readString(Path.of(file));
-        } catch (IOException e) {
-            e.printStackTrace();
+    public <T> List<T> readFilesFromJson(Class<T> infoClass, String file) {
+        List<T> infoList = new ArrayList<>();
+        try (Reader fileReader = new FileReader(file)) {
+            Type type = TypeToken.getParameterized(List.class, infoClass).getType();
+            infoList = new Gson().fromJson(fileReader, type);
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
-        return line;
+        return infoList;
     }
 
-    public List<Worker> addWorkerInfo() {
-        List<Worker> workerList = new ArrayList<>();
-        String line = readFiles(WORKERS_TXT);
-        Scanner sc = new Scanner(line);
-        while (sc.hasNextLine()) {
-            String res = sc.nextLine();
-            Worker worker = new Worker();
-            String[] query = res.split(", ");
-            worker.setName(query[0]);
-            worker.setBirthday(query[1]);
-            worker.setLevel(query[2]);
-            worker.setSalary(Integer.parseInt(query[3]));
-            workerList.add(worker);
-        }
-        return workerList;
-    }
-
-    public void workerInsert() {
-        List<Worker> workerList = addWorkerInfo();
+    public void insertWorker() {
+        List<Worker> workerList = readFilesFromJson(Worker.class, WORKERS_JSON);
         try {
-            insert = connection.prepareStatement("INSERT INTO worker (name, birthday, level, salary) VALUES (?, ?, ?, ?)");
+            insert = connection.prepareStatement(
+                    "INSERT INTO worker (name, birthday, level, salary) VALUES (?, ?, ?, ?)");
             for (Worker worker : workerList) {
                 insert.setString(1, worker.getName());
                 insert.setString(2, worker.getBirthday());
                 insert.setString(3, worker.getLevel());
                 insert.setInt(4, worker.getSalary());
-                insert.executeUpdate();
+                insert.addBatch();
             }
-
+            insert.executeBatch();
+            insert.close();
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 
-    public List<Client> addClientInfo() {
-        List<Client> clientList = new ArrayList<>();
-        String line = readFiles(CLIENT_TXT);
-        Scanner sc = new Scanner(line);
-        while (sc.hasNextLine()) {
-            String res = sc.nextLine();
-            Client client = new Client();
-            String[] query = res.split(", ");
-            client.setName(query[0]);
-            clientList.add(client);
-        }
-        return clientList;
-    }
-
-    public void clientInsert() {
-        List<Client> clientList = addClientInfo();
+    public void insertClient() {
+        List<Client> clientList = readFilesFromJson(Client.class, CLIENT_JSON);
         try {
-            insert = connection.prepareStatement("INSERT INTO client (name) VALUES (?)");
+            insert = connection.prepareStatement(
+                    "INSERT INTO client (name) VALUES (?)");
             for (Client client : clientList) {
                 insert.setString(1, client.getName());
-                insert.executeUpdate();
+                insert.addBatch();
             }
-
+            insert.executeBatch();
+            insert.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 
-    public List<Project> addProjectInfo() {
-        List<Project> projectList = new ArrayList<>();
-        String line = readFiles(PROJECTS_TXT);
-        Scanner sc = new Scanner(line);
-        while (sc.hasNextLine()) {
-            String res = sc.nextLine();
-            Project project = new Project();
-            String[] query = res.split(", ");
-            project.setClient_id(Integer.parseInt(query[0]));
-            project.setName(query[1]);
-            project.setStart_date(query[2]);
-            project.setFinish_date(query[3]);
-            projectList.add(project);
-        }
-        return projectList;
-    }
-
-    public void projectInsert() {
-        List<Project> projectList = addProjectInfo();
-        try {
-            insert = connection.prepareStatement("INSERT INTO project (client_id, name, start_date, finish_date) VALUES (?, ?, ?, ?)");
+    public void insertProject() {
+        List<Project> projectList = readFilesFromJson(Project.class, PROJECTS_JSON);
+        try (PreparedStatement preparedStatement = connection.prepareStatement(
+                "INSERT INTO project (name, client_id, start_date, finish_date) VALUES (?, ?, ?, ?)")){
             for (Project project : projectList) {
-                insert.setInt(1, project.getClient_id());
-                insert.setString(2, project.getName());
-                insert.setString(3, project.getStart_date());
-                insert.setString(4, project.getFinish_date());
-                insert.executeUpdate();
+                preparedStatement.setString(1, project.getName());
+                preparedStatement.setLong(2, project.getClientId());
+                preparedStatement.setString(3, project.getStartDate());
+                preparedStatement.setString(4, project.getFinishDate());
+                preparedStatement.addBatch();
             }
-
+            preparedStatement.executeBatch();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 
-    public List<ProjectIdWorkerId> addProjectIdWorkerIdInfo() {
-        List<ProjectIdWorkerId> projectIdWorkerIdList = new ArrayList<>();
-        String line = readFiles(PROJECT_WORKER_TXT);
-        Scanner sc = new Scanner(line);
-        while (sc.hasNextLine()) {
-            String res = sc.nextLine();
-            ProjectIdWorkerId projectIdWorkerId = new ProjectIdWorkerId();
-            String[] query = res.split(", ");
-            projectIdWorkerId.setProject_id(Long.parseLong(query[0]));
-            projectIdWorkerId.setWorker_id(Long.parseLong(query[1]));
-            projectIdWorkerIdList.add(projectIdWorkerId);
-        }
-        return projectIdWorkerIdList;
-    }
 
-    public void projectIdWorkerIdInsert() {
-        List<ProjectIdWorkerId> projectIdWorkerIdList = addProjectIdWorkerIdInfo();
+    public void insertProjectWorker() {
+        List<ProjectIdWorkerId> projectIdWorkerIdList = readFilesFromJson(ProjectIdWorkerId.class, PROJECT_WORKER_JSON);
         try {
-            insert = connection.prepareStatement("INSERT INTO project_worker (project_id, worker_id) VALUES (?,?)");
+            insert = connection.prepareStatement(
+                    "INSERT INTO project_worker (project_id , worker_id) VALUES (?, ?)");
             for (ProjectIdWorkerId projectIdWorkerId : projectIdWorkerIdList) {
-                insert.setLong(1, projectIdWorkerId.getProject_id());
-                insert.setLong(2, projectIdWorkerId.getWorker_id());
-                insert.executeUpdate();
+                insert.setLong(1, projectIdWorkerId.getProjectId());
+                insert.setLong(2, projectIdWorkerId.getWorkerId());
+                insert.addBatch();
             }
-
+            insert.executeBatch();
+            insert.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
+
 }
 
 

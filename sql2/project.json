@@ -1,0 +1,62 @@
+[
+  {
+    "name": "Project A",
+    "clientId": 1,
+    "startDate": "2023-01-20",
+    "finishDate": "2023-03-22"
+  },
+  {
+    "name": "Project B",
+    "clientId": 2,
+    "startDate": "2023-01-20",
+    "finishDate": "2023-04-21"
+  },
+  {
+    "name": "Project C",
+    "clientId": 2,
+    "startDate": "2023-01-20",
+    "finishDate": "2023-05-03"
+  },
+  {
+    "name": "Project D",
+    "clientId": 3,
+    "startDate": "2023-01-20",
+    "finishDate": "2023-12-01"
+  },
+  {
+    "name": "Project E",
+    "clientId": 4,
+    "startDate": "2023-01-20",
+    "finishDate": "2023-07-01"
+  },
+  {
+    "name": "Project F",
+    "clientId": 5,
+    "startDate": "2023-01-20",
+    "finishDate": "2023-08-16"
+  },
+  {
+    "name": "Project G",
+    "clientId": 5,
+    "startDate": "2023-01-20",
+    "finishDate": "2023-09-02"
+  },
+  {
+    "name": "Project H",
+    "clientId": 5,
+    "startDate": "2023-01-20",
+    "finishDate": "2023-10-26"
+  },
+  {
+    "name": "Project I",
+    "clientId": 3,
+    "startDate": "2023-01-20",
+    "finishDate": "2023-11-12"
+  },
+  {
+    "name": "Project J",
+    "clientId": 1,
+    "startDate": "2023-01-20",
+    "finishDate": "2023-12-25"
+  }
+]

@@ -1,0 +1,118 @@
+[
+  {
+    "projectId": 1,
+    "workerId": 8
+  },
+  {
+    "projectId": 1,
+    "workerId": 7
+  },
+  {
+    "projectId": 2,
+    "workerId": 8
+  },
+  {
+    "projectId": 2,
+    "workerId": 9
+  },
+  {
+    "projectId": 2,
+    "workerId": 3
+  },
+  {
+    "projectId": 2,
+    "workerId": 10
+  },
+  {
+    "projectId": 2,
+    "workerId": 5
+  },
+  {
+    "projectId": 3,
+    "workerId": 4
+  },
+  {
+    "projectId": 3,
+    "workerId": 3
+  },
+  {
+    "projectId": 4,
+    "workerId": 4
+  },
+  {
+    "projectId": 4,
+    "workerId": 9
+  },
+  {
+    "projectId": 4,
+    "workerId": 2
+  },
+  {
+    "projectId": 5,
+    "workerId": 1
+  },
+    {
+      "projectId": 5,
+      "workerId": 6
+    },
+    {
+      "projectId": 5,
+      "workerId": 4
+    },
+    {
+      "projectId": 5,
+      "workerId": 8
+    },
+    {
+      "projectId": 6,
+      "workerId": 4
+    },
+    {
+      "projectId": 6,
+      "workerId": 7
+    },
+    {
+      "projectId": 7,
+      "workerId": 5
+    },
+    {
+      "projectId": 7,
+      "workerId": 9
+    },
+    {
+      "projectId": 8,
+      "workerId": 10
+    },
+    {
+      "projectId": 8,
+      "workerId": 1
+    },
+    {
+      "projectId": 8,
+      "workerId": 5
+    },
+    {
+      "projectId": 9,
+      "workerId": 9
+    },
+    {
+      "projectId": 9,
+      "workerId": 3
+    },
+    {
+      "projectId": 9,
+      "workerId": 6
+    },
+  {
+    "projectId": 10,
+    "workerId": 10
+  },
+  {
+    "projectId": 10,
+    "workerId": 4
+  },
+  {
+    "projectId": 10,
+    "workerId": 2
+  }
+]

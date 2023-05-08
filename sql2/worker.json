@@ -1,0 +1,62 @@
+[
+  {
+    "name": "John",
+    "birthday": "1994-01-07",
+    "level": "Middle",
+    "salary": 3500
+  },
+  {
+    "name": "Max",
+    "birthday": "1993-07-12",
+    "level": "Junior",
+    "salary": 700
+  },
+  {
+    "name": "Ivan",
+    "birthday": "2005-07-12",
+    "level": "Trainee",
+    "salary": 450
+  },
+  {
+    "name": "Anna",
+    "birthday": "1990-12-29",
+    "level": "Middle",
+    "salary": 3000
+  },
+  {
+    "name": "Juli",
+    "birthday": "1994-12-29",
+    "level": "Senior",
+    "salary": 8500
+  },
+  {
+    "name": "Bobo",
+    "birthday": "2008-02-12",
+    "level": "Middle",
+    "salary": 1200
+  },
+  {
+    "name": "Den",
+    "birthday": "1989-03-08",
+    "level": "Trainee",
+    "salary": 250
+  },
+  {
+    "name": "Patrik",
+    "birthday": "1988-07-29",
+    "level": "Senior",
+    "salary": 9000
+  },
+  {
+    "name": "Sergey",
+    "birthday": "1971-05-12",
+    "level": "Senior",
+    "salary": 8500
+  },
+  {
+    "name": "Kostya",
+    "birthday": "1994-07-29",
+    "level": "Junior",
+    "salary": 450
+  }
+]

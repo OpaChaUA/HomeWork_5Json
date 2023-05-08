@@ -4,9 +4,10 @@ import lombok.Data;
 
 @Data
 public class Project {
-    private int client_id;
+    private long id;
     private String name;
-    private String start_date;
-    private String finish_date;
+    private long clientId;
+    private String startDate;
+    private String finishDate;
 
 }
